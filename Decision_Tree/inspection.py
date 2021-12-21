@@ -23,10 +23,13 @@ def CalculateEntropy(train_data):
     y0=(train_data[train_data[:,-1]==Labels[0]])
     P0=y0.shape[0]/total_data
     
-    y1=(train_data[train_data[:,-1]==Labels[1]])
-    P1=y1.shape[0]/total_data
-
-    H=-(P0*m.log2(P0) + P1*m.log2(P1))
+    if Labels.shape[0]==1:
+        P1=0
+        H=-(P0*m.log2(P0))
+    else:
+        y1=(train_data[train_data[:,-1]==Labels[1]])
+        P1=y1.shape[0]/total_data
+        H=-(P0*m.log2(P0) + P1*m.log2(P1))
     return H
 
 def ReturnMajority(train_data):
